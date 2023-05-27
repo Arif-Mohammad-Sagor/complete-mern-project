@@ -1,12 +1,11 @@
-import React from "react";
-import Navbar from "../../Shared/Navbar";
+import React, { useContext } from "react";
 import Banner from "../Banner";
 import Category from "../Category";
-import PopulerItem from "../PopulerItem";
 import Featured from "../Featured";
 import Testimonial from "../Testimonial";
 import MenuItems from "../MenuItems";
 import FeaturedFoods from "../FeaturedFoods";
+
 
 const Home = () => {
   return (
@@ -17,7 +16,6 @@ const Home = () => {
       <MenuItems></MenuItems>
       <FeaturedFoods></FeaturedFoods>
       <Testimonial></Testimonial>
-      <PopulerItem></PopulerItem>
     </div>
   );
 };
