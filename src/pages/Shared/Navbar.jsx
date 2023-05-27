@@ -1,7 +1,16 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../providers/AuthProviders';
 
 const Navbar = () => {
+  const { user, logOut } = useContext(AuthContext);
+  // console.log(user.displayName,user.photoURL)
+
+  const handleLogout = () => {
+    logOut()
+      .then()
+    .catch()
+  }
 
   return (
     <div className="navbar bg-black text-white px-16 fixed z-10 bg-opacity-40 ">
@@ -58,7 +67,7 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="">
-          <p className='text-lg'> BristoBoss</p>
+          <p className="text-lg"> BristoBoss</p>
           <p
             className="
         text-normal"
@@ -77,6 +86,24 @@ const Navbar = () => {
           </li>
           <li>
             <Link to="/shop">Our Shop</Link>
+          </li>
+          {user ? (
+            <>
+              <button onClick={handleLogout}>Logout</button>
+            </>
+          ) : (
+            <>
+              {" "}
+                <button >
+                  <Link to='/login'>Login</Link>
+              </button>
+            </>
+          )}
+          <li>
+            <Link to="/signup">Signup</Link>
+          </li>
+          <li>
+            <Link to="/secrect">Secrect</Link>
           </li>
         </ul>
       </div>
