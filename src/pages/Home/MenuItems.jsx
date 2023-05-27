@@ -18,7 +18,7 @@ const MenuItems = () => {
       ></SectionTitle>
 
       <div className="grid md:grid-cols-2 bg-gray-100 p-6 gap-4">
-        {menu.map((item) => (
+        {menu.slice(0,10).map((item) => (
           <div
             key={item._id}
             className="flex items-center justify-center my-4 gap-6"
