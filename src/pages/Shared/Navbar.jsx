@@ -1,16 +1,17 @@
-import React, { useContext } from 'react'
-import { Link } from 'react-router-dom';
-import { AuthContext } from '../../providers/AuthProviders';
+import React, { useContext } from "react";
+import { Link } from "react-router-dom";
+import { AuthContext } from "../../providers/AuthProviders";
+import { FaShoppingCart } from "react-icons/fa";
+import useCart from "../../hooks/useCart";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
-  // console.log(user.displayName,user.photoURL)
+  const [cart] = useCart();
+
 
   const handleLogout = () => {
-    logOut()
-      .then()
-    .catch()
-  }
+    logOut().then().catch();
+  };
 
   return (
     <div className="navbar bg-black text-white px-16 fixed z-10 bg-opacity-40 ">
@@ -94,8 +95,8 @@ const Navbar = () => {
           ) : (
             <>
               {" "}
-                <button >
-                  <Link to='/login'>Login</Link>
+              <button>
+                <Link to="/login">Login</Link>
               </button>
             </>
           )}
@@ -105,6 +106,14 @@ const Navbar = () => {
           <li>
             <Link to="/secrect">Secrect</Link>
           </li>
+          <li>
+            <Link>
+              <button className="btn gap-2">
+                <FaShoppingCart></FaShoppingCart>
+                <div className="badge badge-secondary">{cart?.length || 0}</div>
+              </button>
+            </Link>
+          </li>
         </ul>
       </div>
       <div className="navbar-end">
@@ -112,6 +121,6 @@ const Navbar = () => {
       </div>
     </div>
   );
-}
+};
 
-export default Navbar
+export default Navbar;

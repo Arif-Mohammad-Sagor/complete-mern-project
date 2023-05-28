@@ -7,6 +7,9 @@ import SignUp from '../pages/UserRegistration/SignUp'
 import Login from "../pages/UserRegistration/Login";
 import SecrectPage from "../pages/ProtectedPage/SecrectPage";
 import PrivateRoute from "./PrivateRoute";
+import Dashboard from "../layouts/Dashboard";
+import MyCart from "../pages/Dashboard/Cart/MyCart";
+import Payment from "../pages/Dashboard/Payment/Payment";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -45,6 +48,20 @@ const router = createBrowserRouter([
         ),
       },
     ],
+  },
+  {
+    path: "/dashboard",
+    element: <Dashboard></Dashboard>,
+    children: [
+      {
+        path: "mycart",
+        element:<MyCart></MyCart>
+      },
+      {
+        path: "payment",
+        element:<Payment></Payment>
+      }
+    ]
   },
 ]);
 
