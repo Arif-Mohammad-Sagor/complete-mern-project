@@ -1,14 +1,34 @@
-import React from 'react'
-import { FaBars, FaShoppingCart } from 'react-icons/fa'
-import { NavLink, Outlet } from 'react-router-dom'
+import React, { useContext, useEffect, useState } from 'react'
+import { FaBars,FaWallet, FaMailBulk, FaUsers,FaShoppingCart,FaHome, FaCalendar, FaStarHalfAlt, FaCalendarCheck, FaBook, FaUtensils } from 'react-icons/fa'
+import {  NavLink, Outlet } from 'react-router-dom'
 import useCart from '../hooks/useCart'
+import useAdmin from '../hooks/useAdmin'
+import axios from 'axios'
+import { AuthContext } from '../providers/AuthProviders'
 
 
 const Dashboard = () => {
-const [cart] = useCart()
+  // const [isAdminBoss, setAdminBoss] = useState(' ')
+  // const { user } = useContext(AuthContext);
+  // useEffect(() => {
+  //   axios.get(`http://localhost:5000/users/admin/${user?.email}`, {
+  //       headers: ` bearer ${localStorage.getItem('access_token')}`
+  //     })
+  //     .then(function (response) {
+  //   // setAdminBoss(response)
+  //       console.log(response);
+
+  //     });
+  // },
+  // [])
+
+const [cart] = useCart();
+  const [isAdmin] = useAdmin();
+  console.log(isAdmin);
+
 
   return (
-    <div className='mx-16'>
+    <div className="mx-16">
       <div className="drawer drawer-mobile">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content   ">
@@ -23,16 +43,93 @@ const [cart] = useCart()
         <div className="drawer-side bg-[#D1A054]">
           <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
           <ul className="menu p-4 w-80 text-base-content">
+            {isAdmin ? (
+              <>
+                {" "}
+                <li>
+                  <NavLink to="/dashboard/mycart">
+                    <FaHome></FaHome>Admin
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/dashboard/additems">
+                    <FaUtensils></FaUtensils> Add Items
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/dashboard/bookings">
+                  <FaBars></FaBars> Manage Items
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/dashboard/bookings">
+                    <FaBook></FaBook> Manage Bookings
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/dashboard/allusers">
+                    <FaUsers></FaUsers> All Users
+                  </NavLink>
+                </li>
+              </>
+            ) : (
+              <>
+                {" "}
+                <li>
+                  <NavLink to="/dashboard/mycart">
+                    {" "}
+                    <FaHome></FaHome> User 
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/reservation">
+                    {" "}
+                    <FaCalendar></FaCalendar>Reservation
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/payment">
+                    {" "}
+                    <FaWallet></FaWallet>Payment
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/review">
+                    {" "}
+                    <FaStarHalfAlt></FaStarHalfAlt> Review
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/bookings">
+                    <FaCalendarCheck></FaCalendarCheck> My Bookings
+                  </NavLink>
+                </li>
+              </>
+            )}
+
+            <div className="divider"></div>
             <li>
-              <NavLink to="/dashboard/mycart">
-                <FaShoppingCart></FaShoppingCart> My-Cart
-                <span className="badge badge-warning">{cart?.length || 0}</span>
-              </NavLink>{" "}
+              <NavLink to="/">
+                {" "}
+                <FaHome></FaHome> Home
+              </NavLink>
             </li>
             <li>
-              <NavLink to="/dashboard/payment">
+              <NavLink to="/menu">
                 {" "}
-                <FaBars></FaBars> Manage Bookings
+                <FaBars></FaBars> Menu
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/shop">
+                {" "}
+                <FaShoppingCart></FaShoppingCart>Shop{" "}
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/contact">
+                {" "}
+                <FaMailBulk></FaMailBulk>Contact
               </NavLink>
             </li>
           </ul>

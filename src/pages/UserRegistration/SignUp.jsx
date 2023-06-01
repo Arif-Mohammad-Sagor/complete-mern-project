@@ -1,42 +1,57 @@
-import React, { useContext, useState } from 'react'
-import auth2 from '../../assets/others/authentication2.png';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useContext, useState } from "react";
+import auth2 from "../../assets/others/authentication2.png";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { AuthContext } from '../../providers/AuthProviders';
+import { AuthContext } from "../../providers/AuthProviders";
 import Swal from "sweetalert2";
+import SocialLogin from "../../Components/SocialLogin";
+import axios from "axios";
 
 const SignUp = () => {
   const { createUser, updateUserProfile } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const { register, handleSubmit,formState: { errors },} = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
   const onSubmit = (data) => {
-console.log(data)
+    console.log(data);
     createUser(data.email, data.password)
-      .then(result => {
-        updateUserProfile(data.name,data.photo)
-          .then()
-        .catch()
-        console.log(result)
-Swal.fire({
-  icon: "success",
-  title: "Successfully user created",
-  text: "Cool",
+      .then((result) => {
 
-});
+        updateUserProfile(data.name, data.photo)
+          .then(result => {
+            console.log(result);
+            const saveUser = { name: data.name, email: data.email }
+            console.log(saveUser);
+            axios.post(`http://localhost:5000/users`, {
+              saveUser
+            })
+              .then(() => {
+              
+            })
+
+          })
+          .catch();
+        console.log(result);
+        Swal.fire({
+          icon: "success",
+          title: "Successfully user created",
+          text: "Cool",
+        });
         navigate("/");
-
       })
-      .catch(error => {
-Swal.fire({
-  icon: "error",
-  title: "Oops...",
-  text: `${error.message}`,
-
-});
-    })
+      .catch((error) => {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: `${error.message}`,
+        });
+      });
   };
-
 
   return (
     <div className="px-16">
@@ -109,7 +124,7 @@ Swal.fire({
                   placeholder="password"
                   {...register("password", {
                     pattern:
-                     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,20}$/,
+                      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,20}$/,
                     required: true,
                     minLength: 6,
                     maxLength: 20,
@@ -149,13 +164,13 @@ Swal.fire({
                 </Link>
               </p>
 
-
+              <SocialLogin></SocialLogin>
             </form>
           </div>
         </div>
       </div>
     </div>
   );
-}
+};
 
-export default SignUp
+export default SignUp;

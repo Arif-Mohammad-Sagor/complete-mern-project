@@ -7,6 +7,7 @@ import {
 } from "react-simple-captcha";
 import { AuthContext } from "../../providers/AuthProviders";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import SocialLogin from "../../Components/SocialLogin";
 
 const Login = () => {
     const [disabled, setDisabled] = useState(true);
@@ -36,11 +37,12 @@ const Login = () => {
                 setSuccess('');
         })
 
-    }
+  }
+  // loading captch here
   useEffect(() => {
     loadCaptchaEnginge(8);
   }, []);
-
+// validating captcha here
     const handleValidateCaptcha = (e) => {
 
     const captchValue = e.target.value;
@@ -115,6 +117,7 @@ const Login = () => {
               </div>
               <p className="text-red-600">{error}</p>
               <p className="text-green-600">{success}</p>
+              <SocialLogin></SocialLogin>
             </form>
           </div>
         </div>
