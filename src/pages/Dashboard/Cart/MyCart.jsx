@@ -2,14 +2,17 @@ import React from 'react'
 import useCart from '../../../hooks/useCart'
 import { FaTrash } from 'react-icons/fa';
 import Swal from 'sweetalert2';
+import { Link } from 'react-router-dom';
 
 const MyCart = () => {
 
   const [cart,refetch] = useCart();
-  console.log(cart.data);
+
   const myCart = cart?.data
 
   const total = myCart?.reduce((sum, item) => item.price + sum, 0);
+   const price = parseFloat(total?.toFixed(2));
+
   const handleDelete = (id) => {
     fetch(`http://localhost:5000/carts/${id}`, {
       method: "DELETE",
@@ -67,8 +70,10 @@ const MyCart = () => {
       <div>
         <div className="flex items-center justify-around bg-slate-200 w-full">
           <p className="text-3xl ">Total Items : {myCart?.length}</p>
-          <p className="text-3xl ">Total Price: $ {total}</p>
-          <button className="btn btn-primary text-xl ">Pay</button>
+          <p className="text-3xl ">Total Price: $ {price}</p>
+          <Link to="/dashboard/payment">
+            <button className="btn btn-primary text-xl ">Pay</button>
+          </Link>
         </div>
         <div className="overflow-x-auto w-full">
           <table className="table w-full">

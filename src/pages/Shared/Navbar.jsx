@@ -105,7 +105,7 @@ const Navbar = () => {
             <Link to="/signup">Signup</Link>
           </li>
           <li>
-            <Link to="/dashboard">DashBoard</Link>
+            <Link to="/dashboard/adminhome">DashBoard</Link>
           </li>
           <li>
             <Link to='/dashboard/mycart'>

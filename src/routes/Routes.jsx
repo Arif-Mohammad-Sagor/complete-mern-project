@@ -11,6 +11,11 @@ import Dashboard from "../layouts/Dashboard";
 import MyCart from "../pages/Dashboard/Cart/MyCart";
 import Payment from "../pages/Dashboard/Payment/Payment";
 import AllUser from "../pages/Dashboard/AllUser/AllUser";
+import AddItem from "../pages/Dashboard/AddItem/AddItem";
+import AdminRoute from "./AdminRoute";
+import ManageItems from "../pages/Dashboard/ManageItem/ManageItems";
+import AdminHome from "../pages/Dashboard/AdminHome/AdminHome";
+import UserHome from "../pages/Dashboard/UserHome/UserHome";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -64,11 +69,40 @@ const router = createBrowserRouter([
       },
       {
         path: "payment",
-        element: <Payment></Payment>,
+        element: (
+          <AdminRoute>
+            <Payment></Payment>
+          </AdminRoute>
+        ),
       },
       {
         path: "allusers",
-      element:<AllUser></AllUser>}
+        element: <AllUser></AllUser>,
+      },
+      {
+        path: "additem",
+        element: (
+          <AdminRoute>
+            <AddItem></AddItem>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "manageItems",
+        element: (
+          <AdminRoute>
+            <ManageItems></ManageItems>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: 'adminhome',
+        element:<AdminRoute><AdminHome></AdminHome></AdminRoute>
+      },
+      {
+        path: 'userhome',
+        element:<UserHome></UserHome>
+    }
     ],
   },
 ]);

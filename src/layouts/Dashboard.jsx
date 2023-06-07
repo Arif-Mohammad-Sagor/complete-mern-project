@@ -8,23 +8,11 @@ import { AuthContext } from '../providers/AuthProviders'
 
 
 const Dashboard = () => {
-  // const [isAdminBoss, setAdminBoss] = useState(' ')
-  // const { user } = useContext(AuthContext);
-  // useEffect(() => {
-  //   axios.get(`http://localhost:5000/users/admin/${user?.email}`, {
-  //       headers: ` bearer ${localStorage.getItem('access_token')}`
-  //     })
-  //     .then(function (response) {
-  //   // setAdminBoss(response)
-  //       console.log(response);
 
-  //     });
-  // },
-  // [])
+  const [cart] = useCart();
 
-const [cart] = useCart();
   const [isAdmin] = useAdmin();
-  console.log(isAdmin);
+  // console.log(isAdmin);
 
 
   return (
@@ -47,18 +35,23 @@ const [cart] = useCart();
               <>
                 {" "}
                 <li>
-                  <NavLink to="/dashboard/mycart">
-                    <FaHome></FaHome>Admin
+                  <NavLink to="/dashboard/adminhome">
+                    <FaHome></FaHome>Admin Home
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to="/dashboard/additems">
+                  <NavLink to="/dashboard/mycart">
+                    <FaShoppingCart></FaShoppingCart> My-cart
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/dashboard/additem">
                     <FaUtensils></FaUtensils> Add Items
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to="/dashboard/bookings">
-                  <FaBars></FaBars> Manage Items
+                  <NavLink to="/dashboard/manageItems">
+                    <FaBars></FaBars> Manage Items
                   </NavLink>
                 </li>
                 <li>
@@ -76,9 +69,15 @@ const [cart] = useCart();
               <>
                 {" "}
                 <li>
+                  <NavLink to="/dashboard/userhome">
+                    {" "}
+                    <FaHome></FaHome> User
+                  </NavLink>
+                </li>
+                <li>
                   <NavLink to="/dashboard/mycart">
                     {" "}
-                    <FaHome></FaHome> User 
+                   <FaShoppingCart></FaShoppingCart> User Cart
                   </NavLink>
                 </li>
                 <li>
